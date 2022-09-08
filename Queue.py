@@ -11,10 +11,33 @@ class Queue:
             self.value = value
             self.following = None
 
+        def __str__(self):
+            return str(self.value)
+
     def __init__(self):
         self.first = None
         self.last = None
         self.length = 0
+        self.cursor = None
+
+    def __len__(self):
+        return self.length
+
+    def __str__(self):
+        return "The Queue with the size {}. The first element is {}, the last element is {}".\
+            format(self.length, self.first.value, self.last.value)
+
+    def __iter__(self):
+        self.cursor = self.first
+        return self
+
+    def __next__(self):
+        if self.cursor:
+            value = self.cursor.value
+            self.cursor = self.cursor.following
+            return value
+        else:
+            raise StopIteration
 
     def enqueue(self, value):
         if self.first is None:
@@ -34,7 +57,3 @@ class Queue:
             self.first = self.first.following
             self.length -= 1
             return gift
-
-    def size(self):
-        return self.length
-

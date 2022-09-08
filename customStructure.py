@@ -2,26 +2,6 @@ from Stack import Stack
 from Queue import Queue
 from BiTree import BiTree
 from VisualizeBiTree import show
-from random import randint
-
-
-# # example of a recursive function
-# def factorial(n):
-#     if n == 1:
-#         return 1
-#     else:
-#         return n * factorial(n-1)
-
-
-# def populating_bi_tree(sample_size):
-#     # use list for sampling the random numbers
-#     sample = []
-#
-#     # populating the sample of size = sample_size
-#     for i in range(sample_size):
-#         sample.append(randint(1, sample_size))
-#
-#     return sample
 
 
 def example1_stack():
@@ -32,7 +12,7 @@ def example1_stack():
         item = chr(initial + step)
         test_stack.push(item)
 
-    print(test_stack.size())
+    print(len(test_stack))
     print(test_stack)
     print(test_stack.first)
     print(test_stack.first.value)
@@ -43,12 +23,12 @@ def example1_stack():
     print(test_stack.pop())
     print(test_stack.pop())
 
-    print(test_stack.size())
+    print(len(test_stack))
 
-    for i in range(10):
-        print(test_stack.pop())
+    for element in test_stack:
+        print("Element: {}".format(element))
 
-    print(test_stack.size())
+    print(test_stack)
 
 
 def example2_queue():
@@ -59,18 +39,18 @@ def example2_queue():
         item = chr(initial + step)
         test_queue.enqueue(item)
 
-    print(test_queue.size())
+    print(len(test_queue))
 
     print(test_queue.dequeue())
-    print(test_queue.size())
+    print(len(test_queue))
 
     print(test_queue.dequeue())
-    print(test_queue.size())
+    print(len(test_queue))
 
-    for i in range(10):
-        print(test_queue.dequeue())
+    for element in test_queue:
+        print("Element: {}".format(element))
 
-    print(test_queue.size())
+    print(test_queue)
 
 
 def example3_comparison_stack_queue():
@@ -126,6 +106,8 @@ def example5_bi_tree(size):
     for item in array:
         test_tree.build(item)
 
+    print(test_tree)
+
     # levels = {}
     # test_tree.get_map_levels(test_tree.root, levels, 'descending')
     # print(levels)
@@ -173,33 +155,29 @@ def example6_visualize(size):
     print('last: {}'.format(test_tree.get_last(test_tree.root)))
     show(test_tree)
 
-    test_tree.remove(27)
-    show(test_tree)
-
-    test_tree.remove(31)
-    show(test_tree)
-
-
-def example7_bi_tree(size, goal):
-    array = []
-    BiTree.get_middle(0, size - 1, array)
-
-    test_tree = BiTree()
-
-    for item in array:
-        test_tree.build(item)
-
-    print(len(test_tree))
-    node, parent = test_tree.find(test_tree.root, goal)
-    print(node, parent)
-
-    # left = BiTree.get_deepest(node)
-    # for item in left:
-    #     print(item)
+    # test_tree.remove(27)
+    # show(test_tree)
     #
-    # right = BiTree.get_deepest(node, "right")
-    # for item in right:
-    #     print(item)
+    # test_tree.remove(31)
+    # show(test_tree)
+
+    print(test_tree.remove(64))
+    show(test_tree)
+
+
+# test creating balanced tree based on random
+def example7_bi_tree(size):
+    test_tree = BiTree.populating_bi_tree(size, "symbols")
+    array = []
+    test_tree.get_array(test_tree.root, array)
+    print(array)
+
+    test_tree.balance_tree()
+    # check balance on the elements count in each level
+    levels = {}
+    test_tree.get_map_levels(test_tree.root, levels)
+    print(levels)
+    show(test_tree)
 
 
 if __name__ == '__main__':
@@ -215,9 +193,33 @@ if __name__ == '__main__':
     # the tree
     # example4_bi_tree()
 
-    # example5_bi_tree(127)
+    example5_bi_tree(127)
 
-    example6_visualize(63)
+    # example6_visualize(63)
 
-    # example7_bi_tree(63, 64)
-    # print('abab' > 'abba')
+    # example7_bi_tree(31)
+    # print(ord('А'), ord('я'), ord('!'), ord('a'), ord('A'), ord('0'))
+    # word = ""
+    # for i in range(130):
+    #     word += chr(i+1040)
+    # print(word)
+
+    # class MyNumbers:
+    #     def __iter__(self):
+    #         self.a = 1
+    #         return self
+    #
+    #     def __next__(self):
+    #         if self.a <= 20:
+    #             x = self.a
+    #             self.a += 1
+    #             return x
+    #         else:
+    #             raise StopIteration
+    #
+    #
+    # myclass = MyNumbers()
+    # myiter = iter(myclass)
+    # for x in myiter:
+    #     print(x)
+
